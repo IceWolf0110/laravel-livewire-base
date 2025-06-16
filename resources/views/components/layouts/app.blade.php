@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>{{ $title ?? 'Page Title' }}</title>
-    </head>
-    <body>
-        {{ $slot }}
+    @include('partials.head')
+    <body class="min-h-screen flex flex-col antialiased bg-white dark:bg-zinc-800">
+        <livewire:web.partials.header/>
+        <div class="flex-auto">
+            <flux:main container="true">
+                {{ $slot }}
+            </flux:main>
+        </div>
+        <livewire:web.partials.footer/>
+        @fluxScripts
     </body>
 </html>
