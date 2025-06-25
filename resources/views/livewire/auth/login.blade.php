@@ -1,7 +1,7 @@
 <?php
     use Illuminate\Auth\Events\Lockout;
     use Illuminate\Validation\ValidationException;
-    use function Livewire\Volt\{state, layout, rules};
+    use function Livewire\Volt\{state, layout};
 
     layout('components.layouts.auth');
 
@@ -11,13 +11,13 @@
         'remember' => false
     ]);
 
-    rules([
-        'email' => 'required|string|email',
-        'password' => 'required|string',
-    ]);
-
     $login = function () {
-        $this->validate();
+        $rules = [
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ];
+
+        $this->validate($rules);
 
         $this->ensureIsNotRateLimited();
 
